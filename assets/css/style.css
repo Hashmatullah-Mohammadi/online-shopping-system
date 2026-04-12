@@ -1,0 +1,35 @@
+:root {
+  --primary: #DD5117;      /* رنگ اصلی (دکمه‌ها) */
+  --primary-dark: #AF2E0F; /* هاور / اکتیو */
+  --accent: #C33D16;      /* تاکید */
+  
+  --bg: #ffffff;          /* بکگراند */
+  --bg-soft: #f5f5f5;     /* بکگراند ملایم */
+
+  --text: #1a1a1a;        /* متن اصلی */
+  --text-light: #555555;  /* متن ثانویه */
+
+  --card: #ffffff;        /* کارت‌ها */
+  --border: #e5e5e5;      /* بوردر */
+
+  --highlight: #CD7657;   /* رنگ خاص / لیبل */
+}
+
+
+
+[data-theme="dark"] {
+  --primary: #DD5117;
+  --primary-dark: #C33D16;
+  --accent: #AF2E0F;
+
+  --bg: #0f0f0f;          /* بکگراند تاریک */
+  --bg-soft: #1a1a1a;
+
+  --text: #ffffff;        /* متن سفید */
+  --text-light: #bbbbbb;
+
+  --card: #1c1c1c;
+  --border: #333333;
+
+  --highlight: #CD7657;
+}
