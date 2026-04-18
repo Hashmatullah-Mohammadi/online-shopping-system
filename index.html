@@ -25,817 +25,1498 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
+
+  <script>
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* BASE STYLES - LIGHT MODE (default) */
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #FFFFFF;
+      color: #111111;
+      transition: background 0.3s ease, color 0.2s ease;
+    }
+
+    /* Ensure all text is visible in light mode */
+    p, h1, h2, h3, h4, h5, h6, span, a, li, .menu-title, .product-info, .price, .rating, .category-info, .testimonial-text, .service-item p {
+      color: #111111 !important;
+    }
+
+    a {
+      color: #111111 !important;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #dc6128 !important;
+    }
+
+    /* Header & Navigation */
+    header, .header-top, .header-main, .desktop-navigation-menu {
+      background: #FFFFFF !important;
+      border-bottom: 1px solid #e5e5e5 !important;
+    }
+
+    /* Buttons */
+    .btn {
+      background: #ed5e1c;
+      color: white !important;
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      display: inline-block;
+      transition: all 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .footer-category-link {
+      color: #999 !important;
+    }
+
+    .category-box-title {
+      color: #fff !important;
+    }
+
+    .nav-title {
+      color: #fff !important;
+    }
+    
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #d65c23;
+      color: #c27b5a !important;
+    }
+    
+    .btn-outline:hover {
+      background: #ed6323;
+      color: white !important;
+    }
+
+    /* Cards */
+    .category-card, .product-card, .testimonial-card, .service-item {
+      background: #FFFFFF !important;
+      border: 1px solid #e5e5e5 !important;
+      border-radius: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .product-card:hover, .category-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+
+    section {
+      background: #FFFFFF !important;
+    }
+
+    section:nth-child(even) {
+      background: #FAFAFA !important;
+    }
+
+    .footer-category {
+      background-color: #0f0f0f;
+    }
+
+    /* Footer */
+    footer, .footer-nav, .footer-bottom {
+      background: #000000 !important;
+      color: #ffffff !important;
+    }
+
+    .footer-nav-link {
+      color: #c2c2c2 !important;
+    }
+
+    /* Inputs */
+    input, select, .search-field {
+      background: #F5F5F5 !important;
+      border: 1px solid #ddd !important;
+      color: #111111 !important;
+      border-radius: 50px;
+      padding: 10px 18px;
+      outline: none;
+    }
+
+    input::placeholder {
+      color: #777 !important;
+    }
+
+    /* Hero Slider */
+    .hero-slider {
+      background: #FFFFFF;
+    }
+    
+    .slide {
+      background-color: #F0F0F0;
+    }
+    
+    .hero-content h1, .hero-content p {
+      color: white !important;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    }
+    
+    .hero-content .year-badge {
+      background: rgba(0,0,0,0.6);
+      color: white !important;
+    }
+
+    /* Action icons */
+    .action-btn, .theme-toggle-btn {
+      color: #111111 !important;
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    /* Add to cart button */
+    .add-to-cart {
+      background: #F5F5F5;
+      border: 1px solid #ddd;
+      color: #111111;
+      padding: 10px 16px;
+      border-radius: 40px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s;
+      width: 100%;
+      margin-top: 12px;
+    }
+    
+    .add-to-cart:hover {
+      background: #c27b5a;
+      color: white !important;
+      border-color: #c27b5a;
+    }
+
+    /* Offer Section */
+    .offer-section {
+      background: linear-gradient(135deg, #c27b5a 0%, #a55e3f 100%);
+    }
+    
+    .offer-section h3, .offer-section .discount, .offer-section p {
+      color: white !important;
+    }
+
+    /* Newsletter */
+    .newsletter {
+      background: #c27b5a;
+    }
+    
+    .newsletter h2, .newsletter p {
+      color: white !important;
+    }
+
+    /* Price styling */
+    .price {
+      color: #c27b5a !important;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+    
+    .old-price {
+      color: #999 !important;
+      text-decoration: line-through;
+      margin-left: 8px;
+      font-size: 0.9rem;
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    
+    /* h2:after {
+      content: '';
+      position: absolute;
+      bottom: -12px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: #c27b5a;
+    } */
+
+    .categories-grid, .products-grid, .testimonials-grid, .services-grid, .instagram-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+    }
+
+    .category-card img, .product-card img, .insta-item img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 20px 20px 0 0;
+    }
+
+    .category-info, .product-info {
+      padding: 20px;
+    }
+
+    .product-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      background: #c27b5a;
+      color: white !important;
+      font-size: 0.7rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 600;
+      z-index: 2;
+    }
+
+    /* NEW DETAILS STYLES */
+    .product-tag {
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+      display: block;
+    }
+    .tag-eco { color: #2ecc71; }
+    .tag-new { color: #3498db; }
+    .tag-hot { color: #e67e22; }
+
+    .quick-view-btn {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: rgba(255,255,255,0.9);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      z-index: 3;
+    }
+    .product-card:hover .quick-view-btn {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* FLASH SALE SECTION */
+    .flash-sale-section {
+      background: #fff0eb !important;
+      border-top: 2px solid #ff7e5f;
+      border-bottom: 2px solid #ff7e5f;
+    }
+    .flash-sale-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+    .flash-sale-timer {
+      background: #ff7e5f;
+      color: white !important;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .flash-sale-timer span { color: white !important; }
+
+    /* CLEARANCE SECTION */
+    .clearance-section {
+      background: #f8f9fa !important;
+    }
+    .clearance-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+    .clearance-card {
+      background: white;
+      border: 1px dashed #ccc;
+      border-radius: 15px;
+      padding: 15px;
+      text-align: center;
+      position: relative;
+    }
+    .clearance-badge {
+      background: #2c3e50;
+      color: white !important;
+      padding: 2px 10px;
+      border-radius: 5px;
+      font-size: 0.7rem;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    .clearance-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    .product-card {
+      position: relative;
+    }
+
+    .rating {
+      color: #f5b042 !important;
+      margin: 8px 0;
+    }
+
+    .countdown {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 30px 0;
+    }
+    
+    .countdown div {
+      background: rgba(255,255,255,0.2);
+      padding: 12px 20px;
+      border-radius: 16px;
+      color: rgb(0, 0, 0) !important;
+      text-align: center;
+      min-width: 80px;
+    }
+    
+    .countdown span {
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+      color: rgb(0, 0, 0) !important;
+    }
+
+    .header-user-actions {
+      display: flex;
+      gap: 20px;
+      align-items: center;
+    }
+    
+    .count {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #c27b5a;
+      color: white !important;
+      font-size: 10px;
+      padding: 2px 6px;
+      border-radius: 50%;
+      font-weight: bold;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 0 20px; }
+      h2 { font-size: 1.6rem; }
+      .hero-content h1 { font-size: 2rem; }
+      .countdown div { padding: 8px 12px; min-width: 60px; }
+      .countdown span { font-size: 1.4rem; }
+    }
+
+    /* Dark mode specific overrides (applied via JS class) */
+    body.dark-mode {
+      background: #121212 !important;
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode p, 
+    body.dark-mode h1, 
+    body.dark-mode h2, 
+    body.dark-mode h3, 
+    body.dark-mode h4, 
+    body.dark-mode h5, 
+    body.dark-mode h6, 
+    body.dark-mode span, 
+    body.dark-mode li, 
+    body.dark-mode .product-info, 
+    body.dark-mode .category-info,
+    body.dark-mode .testimonial-text,
+    body.dark-mode .service-item p {
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode header, 
+    body.dark-mode .header-top, 
+    body.dark-mode .header-main, 
+    body.dark-mode .desktop-navigation-menu {
+      background: #1e1e1e !important;
+      border-bottom-color: #333 !important;
+    }
+    body.dark-mode .category-card, 
+    body.dark-mode .product-card, 
+    body.dark-mode .testimonial-card, 
+    body.dark-mode .service-item {
+      background: #1e1e1e !important;
+      border-color: #333 !important;
+    }
+    body.dark-mode section {
+      background: #121212 !important;
+    }
+    body.dark-mode section:nth-child(even) {
+      background: #1a1a1a !important;
+    }
+    body.dark-mode footer, 
+    body.dark-mode .footer-nav, 
+    body.dark-mode .footer-bottom {
+      background: #0f0f0f !important;
+    }
+    body.dark-mode input, 
+    body.dark-mode select, 
+    body.dark-mode .search-field {
+      background: #2a2a2a !important;
+      border-color: #444 !important;
+      color: #eee !important;
+    }
+    body.dark-mode .add-to-cart {
+      background: #2a2a2a;
+      border-color: #444;
+      color: #eee;
+    }
+    body.dark-mode .add-to-cart:hover {
+      background: #c27b5a;
+      color: white !important;
+    }
+    body.dark-mode .action-btn, 
+    body.dark-mode .theme-toggle-btn {
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode a {
+      color: #e0e0e0 !important;
+    }
+    body.dark-mode a:hover {
+      color: #c27b5a !important;
+    }
+    body.dark-mode .footer-nav-link {
+      color: #cccccc !important;
+    }
+    body.dark-mode .old-price {
+      color: #aaa !important;
+    }
+  </style>
 </head>
 
 <body>
 
-
   <div class="overlay" data-overlay></div>
 
-  <!--
-    - MODAL
-  -->
+  <!-- HEADER -->
+<header>
 
-  <div class="modal" data-modal>
+  <div class="header-top">
 
-    <div class="modal-close-overlay" data-modal-overlay></div>
+    <div class="container">
 
-    <div class="modal-content">
+      <ul class="header-social-container">
 
-      <button class="modal-close-btn" data-modal-close>
-        <ion-icon name="close-outline"></ion-icon>
-      </button>
-
-      <div class="newsletter-img">
-        <img src="./assets/images/newsletter.png" alt="subscribe newsletter" width="400" height="400">
-      </div>
-
-      <div class="newsletter">
-
-        <form action="#">
-
-          <div class="newsletter-header">
-
-            <h3 class="newsletter-title">Subscribe Newsletter.</h3>
-
-            <p class="newsletter-desc">
-              Subscribe the <b>Anon</b> to get latest products and discount update.
-            </p>
-
-          </div>
-
-          <input type="email" name="email" class="email-field" placeholder="Email Address" required>
-
-          <button type="submit" class="btn-newsletter">Subscribe</button>
-
-        </form>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-
-
-
-  <!--
-    - NOTIFICATION TOAST
-  -->
-
-  <div class="notification-toast" data-toast>
-
-    <button class="toast-close-btn" data-toast-close>
-      <ion-icon name="close-outline"></ion-icon>
-    </button>
-
-    <div class="toast-banner">
-      <img src="./assets/images/products/jewellery-1.jpg" alt="Rose Gold Earrings" width="80" height="70">
-    </div>
-
-    <div class="toast-detail">
-
-      <p class="toast-message">
-        Someone in new just bought
-      </p>
-
-      <p class="toast-title">
-        Rose Gold Earrings
-      </p>
-
-      <p class="toast-meta">
-        <time datetime="PT2M">2 Minutes</time> ago
-      </p>
-
-    </div>
-
-  </div>
-
-
-
-
-
-  <!--
-    - HEADER
-  -->
-
-  <header>
-
-    <div class="header-top">
-
-      <div class="container">
-
-        <ul class="header-social-container">
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
-
-        <div class="header-alert-news">
-          <p>
-            <b>Free Shipping</b>
-            This Week Order Over - $55
-          </p>
-        </div>
-
-        <div class="header-top-actions">
-
-          <select name="currency">
-
-            <option value="usd">USD &dollar;</option>
-            <option value="eur">EUR &euro;</option>
-
-          </select>
-
-          <select name="language">
-
-            <option value="en-US">English</option>
-            <option value="es-ES">Espa&ntilde;ol</option>
-            <option value="fr">Fran&ccedil;ais</option>
-
-          </select>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <div class="header-main">
-
-      <div class="container">
-
-        <a href="#" class="header-logo">
-          <img src="./assets/images/logo/logo.png" alt="Alma logo" width="100" height="30">
-        </a>
-
-        <div class="header-search-container">
-
-          <input type="search" name="search" class="search-field" placeholder="Enter your product name...">
-
-          <button class="search-btn">
-            <ion-icon name="search-outline"></ion-icon>
-          </button>
-
-        </div>
-
-        <div class="header-user-actions">
-
-          <button class="action-btn">
-            <ion-icon name="person-outline"></ion-icon>
-          </button>
-
-          <button class="action-btn">
-            <ion-icon name="heart-outline"></ion-icon>
-            <span class="count">0</span>
-          </button>
-
-          <button class="action-btn">
-            <ion-icon name="bag-handle-outline"></ion-icon>
-            <span class="count">0</span>
-          </button>
-
-        </div>
-
-      </div>
-
-    </div>
-
-    <nav class="desktop-navigation-menu">
-
-      <div class="container">
-
-        <ul class="desktop-menu-category-list">
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Home</a>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Categories</a>
-
-            <div class="dropdown-panel">
-
-              <ul class="dropdown-panel-list">
-
-                <li class="menu-title">
-                  <a href="#">Electronics</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Desktop</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Laptop</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Camera</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Tablet</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Headphone</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="./assets/images/electronics-banner-1.jpg" alt="headphone collection" width="250"
-                      height="119">
-                  </a>
-                </li>
-
-              </ul>
-
-              <ul class="dropdown-panel-list">
-
-                <li class="menu-title">
-                  <a href="#">Men's</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Formal</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Casual</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Sports</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Jacket</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Sunglasses</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="./assets/images/mens-banner.jpg" alt="men's fashion" width="250" height="119">
-                  </a>
-                </li>
-
-              </ul>
-
-              <ul class="dropdown-panel-list">
-
-                <li class="menu-title">
-                  <a href="#">Women's</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Formal</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Casual</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Perfume</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Cosmetics</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Bags</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="./assets/images/womens-banner.jpg" alt="women's fashion" width="250" height="119">
-                  </a>
-                </li>
-
-              </ul>
-
-              <ul class="dropdown-panel-list">
-
-                <li class="menu-title">
-                  <a href="#">Electronics</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Smart Watch</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Smart TV</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Keyboard</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Mouse</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">Microphone</a>
-                </li>
-
-                <li class="panel-list-item">
-                  <a href="#">
-                    <img src="./assets/images/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119">
-                  </a>
-                </li>
-
-              </ul>
-
-            </div>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Men's</a>
-
-            <ul class="dropdown-list">
-
-              <li class="dropdown-item">
-                <a href="#">Shirt</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Shorts & Jeans</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Safety Shoes</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Wallet</a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Women's</a>
-
-            <ul class="dropdown-list">
-
-              <li class="dropdown-item">
-                <a href="#">Dress & Frock</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Earrings</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Necklace</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Makeup Kit</a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Jewelry</a>
-
-            <ul class="dropdown-list">
-
-              <li class="dropdown-item">
-                <a href="#">Earrings</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Couple Rings</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Necklace</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Bracelets</a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Perfume</a>
-
-            <ul class="dropdown-list">
-
-              <li class="dropdown-item">
-                <a href="#">Clothes Perfume</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Deodorant</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Flower Fragrance</a>
-              </li>
-
-              <li class="dropdown-item">
-                <a href="#">Air Freshener</a>
-              </li>
-
-            </ul>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Blog</a>
-          </li>
-
-          <li class="menu-category">
-            <a href="#" class="menu-title">Hot Offers</a>
-          </li>
-
-        </ul>
-
-      </div>
-
-    </nav>
-
-    <div class="mobile-bottom-navigation">
-
-      <button class="action-btn" data-mobile-menu-open-btn>
-        <ion-icon name="menu-outline"></ion-icon>
-      </button>
-
-      <button class="action-btn">
-        <ion-icon name="bag-handle-outline"></ion-icon>
-
-        <span class="count">0</span>
-      </button>
-
-      <button class="action-btn">
-        <ion-icon name="home-outline"></ion-icon>
-      </button>
-
-      <button class="action-btn">
-        <ion-icon name="heart-outline"></ion-icon>
-
-        <span class="count">0</span>
-      </button>
-
-      <button class="action-btn" data-mobile-menu-open-btn>
-        <ion-icon name="grid-outline"></ion-icon>
-      </button>
-
-    </div>
-
-    <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
-
-      <div class="menu-top">
-        <h2 class="menu-title">Menu</h2>
-
-        <button class="menu-close-btn" data-mobile-menu-close-btn>
-          <ion-icon name="close-outline"></ion-icon>
-        </button>
-      </div>
-
-      <ul class="mobile-menu-category-list">
-
-        <li class="menu-category">
-          <a href="#" class="menu-title">Home</a>
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
         </li>
 
-        <li class="menu-category">
-
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Men's</p>
-
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
-
-          <ul class="submenu-category-list" data-accordion>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Shirt</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Shorts & Jeans</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Safety Shoes</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Wallet</a>
-            </li>
-
-          </ul>
-
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </a>
         </li>
 
-        <li class="menu-category">
-
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Women's</p>
-
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
-
-          <ul class="submenu-category-list" data-accordion>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Dress & Frock</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Earrings</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Necklace</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Makeup Kit</a>
-            </li>
-
-          </ul>
-
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
         </li>
 
-        <li class="menu-category">
-
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Jewelry</p>
-
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
-
-          <ul class="submenu-category-list" data-accordion>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Earrings</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Couple Rings</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Necklace</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Bracelets</a>
-            </li>
-
-          </ul>
-
-        </li>
-
-        <li class="menu-category">
-
-          <button class="accordion-menu" data-accordion-btn>
-            <p class="menu-title">Perfume</p>
-
-            <div>
-              <ion-icon name="add-outline" class="add-icon"></ion-icon>
-              <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
-            </div>
-          </button>
-
-          <ul class="submenu-category-list" data-accordion>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Clothes Perfume</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Deodorant</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Flower Fragrance</a>
-            </li>
-
-            <li class="submenu-category">
-              <a href="#" class="submenu-title">Air Freshener</a>
-            </li>
-
-          </ul>
-
-        </li>
-
-        <li class="menu-category">
-          <a href="#" class="menu-title">Blog</a>
-        </li>
-
-        <li class="menu-category">
-          <a href="#" class="menu-title">Hot Offers</a>
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-linkedin"></ion-icon>
+          </a>
         </li>
 
       </ul>
 
-      <div class="menu-bottom">
+      <div class="header-alert-news">
+        <p>
+      <p data-i18n="free_shipping_note">
+        <b>Free Shipping</b> This Week Order Over - $55
+      </p>
+      </div>
 
-        <ul class="menu-category-list">
+      <div class="header-top-actions">
 
-          <li class="menu-category">
+        <select name="currency">
 
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Language</p>
+          <option value="usd">USD &dollar;</option>
+          <option value="eur">EUR &euro;</option>
 
-              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
-            </button>
+        </select>
 
-            <ul class="submenu-category-list" data-accordion>
+        <select onchange="loadLanguage(this.value)">
+          <option value="en">English</option>
+          <option value="fa">Dari</option>
+          <option value="ps">Pashto</option>
+        </select>
+      </div>
 
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">English</a>
-              </li>
+    </div>
 
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Espa&ntilde;ol</a>
-              </li>
+  </div>
 
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">Fren&ccedil;h</a>
-              </li>
+  <div class="header-main">
 
-            </ul>
+    <div class="container">
 
-          </li>
+      <a href="#" class="header-logo">
+        <img src="./assets/images/logo/logo.png" alt="Alma logo" width="100" height="30">
+      </a>
 
-          <li class="menu-category">
-            <button class="accordion-menu" data-accordion-btn>
-              <p class="menu-title">Currency</p>
-              <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
-            </button>
+      <div class="header-search-container">
 
-            <ul class="submenu-category-list" data-accordion>
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">USD &dollar;</a>
-              </li>
+        <input type="search" name="search" class="search-field" placeholder="Enter your product name..." data-i18n="search_placeholder">
 
-              <li class="submenu-category">
-                <a href="#" class="submenu-title">EUR &euro;</a>
-              </li>
-            </ul>
-          </li>
-
-        </ul>
-
-        <ul class="menu-social-container">
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-facebook"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-twitter"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-instagram"></ion-icon>
-            </a>
-          </li>
-
-          <li>
-            <a href="#" class="social-link">
-              <ion-icon name="logo-linkedin"></ion-icon>
-            </a>
-          </li>
-
-        </ul>
+        <button class="search-btn">
+          <ion-icon name="search-outline"></ion-icon>
+        </button>
 
       </div>
 
-    </nav>
+      <div class="header-user-actions">
+        <button class="action-btn theme-toggle-btn" id="theme-toggle-btn" aria-label="Toggle Dark Mode">
+          <a href="./register.html" style="text-decoration: none; color: #000000;"> <ion-icon name="moon-outline"></ion-icon></a>
+        </button>
 
-  </header>
+        <button class="action-btn">
+          <a href="./login.html" style="text-decoration: none; color: #000000;"><ion-icon name="person-outline"></ion-icon></a>
+        </button>
+
+        <button class="action-btn">
+          <a href="./cart.html" style="text-decoration: none; color: #000000;"><ion-icon name="heart-outline"></ion-icon></a>
+          <span class="count">0</span>
+        </button>
+
+        <button class="action-btn">
+          <a href="./checkout.html" style="text-decoration: none; color: #000000;"> <ion-icon name="bag-handle-outline"></ion-icon></a>
+          <span class="count">0</span>
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <nav class="desktop-navigation-menu">
+
+    <div class="container">
+
+      <ul class="desktop-menu-category-list">
+
+        <li class="menu-category">
+          <a href="index.html" class="menu-title" data-i18n="header_home">Home</a>
+        </li>
+        
+
+        <li class="menu-category">
+          <a href="./products.html" class="menu-title" data-i18n="header_categories">Categories</a>
+
+          <div class="dropdown-panel">
+
+            <ul class="dropdown-panel-list">
+
+              <li class="menu-title">
+                <a href="#" data-i18n="header_electronics">Electronics</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_desktop">Desktop</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_laptop">Laptop</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_camera">Camera</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_tablet">Tablet</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_headphone">Headphone</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#">
+                  <img src="./assets/images/electronics-banner-1.jpg" alt="headphone collection" width="250"
+                    height="119">
+                </a>
+              </li>
+
+            </ul>
+
+            <ul class="dropdown-panel-list">
+
+              <li class="menu-title">
+                <a href="#" data-i18n="header_mens">mens</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_mens_formal">Formal</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_mens_casual">Casual</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_mens_sports">Sports</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_mens_jacket">Jacket</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_mens_sunglasses">Sunglasses</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#">
+                  <img src="./assets/images/mens-banner.jpg" alt="mens fashion" width="250" height="119">
+                </a>
+              </li>
+
+            </ul>
+
+            <ul class="dropdown-panel-list">
+
+              <li class="menu-title">
+                <a href="#" data-i18n="header_womens">womens</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_womens_formal" >Formal</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_womens_casual">Casual</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header-perfume">Perfume</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_womens_cosmetics">Cosmetics</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_womens_bags">Bags</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#">
+                  <img src="./assets/images/womens-banner.jpg" alt="womens fashion" width="250" height="119">
+                </a>
+              </li>
+
+            </ul>
+
+            <ul class="dropdown-panel-list">
+
+              <li class="menu-title">
+                <a href="#" data-i18n="header_electronics">Electronics</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_electronics_smartwatch">Smart Watch</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_electronics_smarttv">Smart TV</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_electronics_keyboard">Keyboard</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_electronics_mouse">Mouse</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#" data-i18n="header_electronics_microphone">Microphone</a>
+              </li>
+
+              <li class="panel-list-item">
+                <a href="#">
+                  <img src="./assets/images/electronics-banner-2.jpg" alt="mouse collection" width="250" height="119">
+                </a>
+              </li>
+
+            </ul>
+
+          </div>
+        </li>
+
+        <li class="menu-category">
+          <a href="./products.html" class="menu-title" data-i18n="header_mens">Men's</a>
+
+          <ul class="dropdown-list">
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_mens_shirt">Shirt</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_mens_shorts_jeans">Shorts & Jeans</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_mens_safety_shoes">Safety Shoes</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_mens_wallet">Wallet</a>
+            </li>
+
+          </ul>
+        </li>
+
+        <li class="menu-category">
+          <a href="./products.html" class="menu-title" data-i18n="header_womens">womens</a>
+
+          <ul class="dropdown-list">
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_womens_dress_frock">Dress & Frock</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_womens_earrings"  >Earrings</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_womens_necklace">Necklace</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_womens_makeup_kit">Makeup Kit</a>
+            </li>
+
+          </ul>
+        </li>
+
+        <li class="menu-category">
+          <a href="./products.html" class="menu-title" data-i18n="header_jewelry">Jewelry</a>
+
+          <ul class="dropdown-list">
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_jewelry_earrings">Earrings</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_jewelry_couple_rings">Couple Rings</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_jewelry_necklace">Necklace</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_jewelry_bracelets">Bracelets</a>
+            </li>
+
+          </ul>
+        </li>
+
+        <li class="menu-category">
+          <a href="./products.html" class="menu-title" data-i18n="header_perfume">Perfume</a>
+
+          <ul class="dropdown-list">
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_perfume_clothes">Clothes Perfume</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_perfume_deodorant">Deodorant</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_perfume_flower_fragrance">Flower Fragrance</a>
+            </li>
+
+            <li class="dropdown-item">
+              <a href="#" data-i18n="header_perfume_air_freshener">Air Freshener</a>
+            </li>
+
+          </ul>
+        </li>
+
+        <li class="menu-category">
+          <a href="./checkout.html" class="menu-title" data-i18n="header_blog">Blog</a>
+        </li>
+
+        <li class="menu-category">
+          <a href="./products.html" class="menu-title" data-i18n="header_hot_offers">Hot Offers</a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </nav>
+
+  <div class="mobile-bottom-navigation">
+
+    <button class="action-btn" data-mobile-menu-open-btn>
+      <ion-icon name="menu-outline"></ion-icon>
+    </button>
+
+    <button class="action-btn">
+      <ion-icon name="bag-handle-outline"></ion-icon>
+
+      <span class="count">0</span>
+    </button>
+
+    <button class="action-btn">
+      <ion-icon name="home-outline"></ion-icon>
+    </button>
+
+    <button class="action-btn">
+      <ion-icon name="heart-outline"></ion-icon>
+
+      <span class="count">0</span>
+    </button>
+
+    <button class="action-btn" data-mobile-menu-open-btn>
+      <ion-icon name="grid-outline"></ion-icon>
+    </button>
+
+  </div>
+
+  <nav class="mobile-navigation-menu  has-scrollbar" data-mobile-menu>
+
+    <div class="menu-top">
+      <h2 class="menu-title" data-i18n="mobile_menu">Menu</h2>
+
+      <button class="menu-close-btn" data-mobile-menu-close-btn>
+        <ion-icon name="close-outline"></ion-icon>
+      </button>
+    </div>
+
+    <ul class="mobile-menu-category-list">
+
+      <li class="menu-category">
+        <a href="index.html" class="menu-title" data-i18n="mobile_home">Home</a>
+      </li>
+      
+
+      <li class="menu-category">
+
+        <button class="accordion-menu" data-accordion-btn>
+          <p class="menu-title" data-i18n="mobile_men" >Men's</p>
+
+          <div>
+            <ion-icon name="add-outline" class="add-icon"></ion-icon>
+            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+          </div>
+        </button>
+
+        <ul class="submenu-category-list" data-accordion>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_men_shirt">Shirt</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_men_shorts_jeans">Shorts & Jeans</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_men_safety_shoes">Safety Shoes</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_men_wallet">Wallet</a>
+          </li>
+
+        </ul>
+
+      </li>
+
+      <li class="menu-category">
+
+        <button class="accordion-menu" data-accordion-btn>
+          <p class="menu-title" data-i18n="mobile_women">womens</p>
+
+          <div>
+            <ion-icon name="add-outline" class="add-icon"></ion-icon>
+            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+          </div>
+        </button>
+
+        <ul class="submenu-category-list" data-accordion>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_women_dress_frock">Dress & Frock</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_women_earrings">Earrings</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_women_necklace">Necklace</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_women_makeup_kit">Makeup Kit</a>
+          </li>
+
+        </ul>
+
+      </li>
+
+      <li class="menu-category">
+
+        <button class="accordion-menu" data-accordion-btn>
+          <p class="menu-title" data-i18n="mobile_jewelry">Jewelry</p>
+
+          <div>
+            <ion-icon name="add-outline" class="add-icon"></ion-icon>
+            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+          </div>
+        </button>
+
+        <ul class="submenu-category-list" data-accordion>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_jewelry_earrings">Earrings</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_jewelry_couple_rings">Couple Rings</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_jewelry_necklace">Necklace</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_jewelry_bracelets">Bracelets</a>
+          </li>
+
+        </ul>
+
+      </li>
+
+      <li class="menu-category">
+
+        <button class="accordion-menu" data-accordion-btn>
+          <p class="menu-title" data-i18n="mobile_perfume">Perfume</p>
+
+          <div>
+            <ion-icon name="add-outline" class="add-icon"></ion-icon>
+            <ion-icon name="remove-outline" class="remove-icon"></ion-icon>
+          </div>
+        </button>
+
+        <ul class="submenu-category-list" data-accordion>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_perfume_clothes">Clothes Perfume</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_perfume_deodorant">Deodorant</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_perfume_flower_fragrance">Flower Fragrance</a>
+          </li>
+
+          <li class="submenu-category">
+            <a href="#" class="submenu-title" data-i18n="mobile_perfume_air_freshener">Air Freshener</a>
+          </li>
+
+        </ul>
+
+      </li>
+
+      <li class="menu-category">
+        <a href="#" class="menu-title" data-i18n="mobile_blog">Blog</a>
+      </li>
+
+      <li class="menu-category">
+        <a href="#" class="menu-title" data-i18n="mobile_hot_offers">Hot Offers</a>
+      </li>
+
+    </ul>
+
+    <div class="menu-bottom">
+
+      <ul class="menu-category-list">
+
+        <li class="menu-category">
+
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title" data-i18n="mobile_language">Language</p>
+
+            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title" data-i18n="mobile_language_english">English</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title" data-i18n="mobile_language_spanish">Espa&ntilde;ol</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title" data-i18n="mobile_language_french">Fren&ccedil;h</a>
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="menu-category">
+          <button class="accordion-menu" data-accordion-btn>
+            <p class="menu-title" data-i18n="mobile_currency">Currency</p>
+            <ion-icon name="caret-back-outline" class="caret-back"></ion-icon>
+          </button>
+
+          <ul class="submenu-category-list" data-accordion>
+            <li class="submenu-category">
+              <a href="#" class="submenu-title" data-i18n="mobile_currency_usd">USD &dollar;</a>
+            </li>
+
+            <li class="submenu-category">
+              <a href="#" class="submenu-title" data-i18n="mobile_currency_eur">EUR &euro;</a>
+            </li>
+          </ul>
+        </li>
+
+      </ul>
+
+      <ul class="menu-social-container">
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-facebook"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-twitter"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-instagram"></ion-icon>
+          </a>
+        </li>
+
+        <li>
+          <a href="#" class="social-link">
+            <ion-icon name="logo-linkedin"></ion-icon>
+          </a>
+        </li>
+
+      </ul>
+
+    </div>
+
+  </nav>
+
+</header>
 
 
 
-  <!--
-    - FOOTER
-  -->
+<main>
+    <!-- HERO SLIDER -->
+  <div class="hero-slider" style="position: relative; width: 100%; height: 85vh; min-height: 550px; overflow: hidden;">
+    <div class="slider-container" style="position: relative; width: 100%; height: 100%;">
+      <div class="slide slide1 active" style="position: absolute; width: 100%; height: 100%; background-image: linear-gradient(135deg, rgba(0,0,0,0.5), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1445205170230-053b83016050?w=1600'); background-size: cover; background-position: center; display: flex; align-items: center;">
+        <div class="hero-content" style="max-width: 600px; margin-left: 8%;">
+          <div class="year-badge" style="background: rgba(255, 255, 255, 0.5); display: inline-block; padding: 5px 18px; border-radius: 30px; margin-bottom: 20px;"><span>2026 ✨</span></div>
+          <h1 style="font-size: 3.5rem; font-weight: 800; color: white !important;" data-i18n="alma-new-collection">Alma New<br>Collection</h1>
+          <p style="color: white !important; margin: 20px 0;" data-i18n="a-new-fashion">A new era of fashion & quality with exclusive 2026 designs</p>
+          <a href="#" class="btn" data-i18n="shop-now">Shop Now →</a>
+          <a href="#" class="btn btn-outline" style="margin-left: 15px;" data-i18n="discover">Discover →</a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <footer>
+  <!-- CATEGORIES -->
+  <section style="padding: 70px 0;">
+    <div class="container">
+      <h2 data-i18n="shop-by-category">Shop by Category</h2>
+      <div class="categories-grid">
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=500" alt="Men fashion">
+          <div class="category-info">
+            <h3 data-i18n="mens-fashion">Men's Fashion</h3>
+            <p data-i18n="products">234 products</p>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=500" alt="Women fashion">
+          <div class="category-info">
+            <h3 data-i18n="womens-fation">Women's Fashion</h3>
+            <p data-i18n="products">312 products</p>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=500" alt="Shoes">
+          <div class="category-info">
+            <h3 data-i18n="shoes">Shoes</h3>
+            <p data-i18n="products">156 products</p>
+          </div>
+        </div>
+        <div class="category-card">
+          <img src="https://images.unsplash.com/photo-1550009158-9ebf69173e03?w=500" alt="Accessories">
+          <div class="category-info">
+            <h3 data-i18n="accessories">Accessories</h3>
+            <p data-i18n="products">98 products</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED PRODUCTS -->
+  <section style="padding: 70px 0; background: #FAFAFA !important;">
+    <div class="container">
+      <h2 data-i18n="featured-products">Featured Products</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-badge" data-i18n="bestseller">Bestseller</div>
+          <button class="quick-view-btn" data-i18n="quick_view">Quick View</button>
+          <a href="./product-details.html" style="text-decoration: none;"><img src="https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=400" alt="Classic Denim Jacket"></a>
+          <div class="product-info">
+            <span class="product-tag tag-new" data-i18n="new-season">New Season</span>
+            <h3 data-i18n="denim_jacket">Classic Denim Jacket</h3>
+            <div class="rating" data-i18n="rating_5">(5.0)</div>
+            <div class="price">$89.99 <span class="old-price">$129.99</span></div>
+            <p data-i18n="denim_desc">Premium quality denim with a modern fit.</p>
+            <button class="add-to-cart" data-i18n="add_to_cart">Add to Cart 🛒</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-badge">-30%</div>
+          <button class="quick-view-btn" data-i18n="quick_view">Quick View</button>
+
+          <a href="./product-details.html" style="text-decoration: none;"><img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400" alt="Floral Summer Dress"></a>
+          <div class="product-info">
+            <span class="product-tag tag-eco" data-i18n="eco-friendly">Eco-Friendly</span>
+            <h3 data-i18n="floral-summer">Floral Summer Dress</h3>
+            <div class="rating">★★★★★ (4.9)</div>
+            <div class="price">$59.99 <span class="old-price">$89.99</span></div>
+            <p style="font-size: 0.85rem; margin-bottom: 10px;" data-i18n="sustainable-cotton">Sustainable cotton with beautiful floral prints.</p>
+            <button class="add-to-cart" data-i18n="add-to-cart">Add to Cart 🛒</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-badge" data-i18n="limited">Limited Edition</div>
+          <button class="quick-view-btn" data-i18n="quick_view">Quick View</button>
+          <a href="./product-details.html" style="text-decoration: none;">  <img src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=400" alt="Leather Sneakers"></a>
+          <div class="product-info">
+            <span class="product-tag tag-hot" data-i18n="high-demand">High Demand</span>
+            <h3 data-i18n="leather-sneaker">Leather Sneakers</h3>
+            <div class="rating">★★★★☆ (4.8)</div>
+            <div class="price">$119.99</div>
+            <p style="font-size: 0.85rem; margin-bottom: 10px;" data-i18n="handcrafted">Handcrafted Italian leather for daily comfort.</p>
+            <button class="add-to-cart" data-i18n="add-to-cart">Add to Cart 🛒</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-badge" data-i18n="new">New 2026</div>
+          <button class="quick-view-btn" data-i18n="quick_view">Quick View</button>
+          <a href="./product-details.html" style="text-decoration: none;">          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="Minimalist Watch"></a>
+          <div class="product-info">
+            <span class="product-tag tag-timeless" data-i18n="timeless">Timeless</span>
+            <h3 data-i18n="minimalist-watch">Minimalist Watch</h3>
+            <div class="rating">★★★★☆ (4.7)</div>
+            <div class="price">$149.99</div>
+            <p style="font-size: 0.85rem; margin-bottom: 10px;" data-i18n="elegant-design">Elegant design with premium leather strap.</p>
+            <button class="add-to-cart" data-i18n="add-to-cart">Add to Cart 🛒</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRENDING NOW -->
+  <section style="padding: 70px 0;">
+    <div class="container">
+      <h2 data-i18n="trending-now">Trending-now</h2>
+      <div class="products-grid">
+        <div class="product-card">
+          <button class="quick-view-btn" data-i18n="quick_view">Quick View</button>
+          <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400" alt="Oversized Hoodie">
+          <div class="product-info">
+            <span class="product-tag tag-hot" data-i18n="trending">Trending</span>
+            <h3 data-i18n="oversized-hoodie">Oversized Hoodie</h3>
+            <div class="rating">★★★★★ (4.9)</div>
+            <div class="price">$69.99</div>
+            <p style="font-size: 0.85rem; margin-bottom: 10px;" data-i18n="soft-fleece">Ultra-soft fleece for the perfect cozy look.</p>
+            <button class="add-to-cart" data-i18n="buy_now">Buy Now</button>  
+          </div>
+        </div>
+        <div class="product-card">
+          <button class="quick-view-btn" data-i18n="quick_view">Quick View</button>
+          <img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400" alt="Leather Tote Bag">
+          <div class="product-info">
+            <span class="product-tag tag-premium" data-i18n="premium">Premium</span>
+            <h3 data-i18n="leather-tote-bag">Leather Tote Bag</h3>
+            <div class="rating">★★★★☆ (4.8)</div>
+            <div class="price">$79.99</div>
+            <p style="font-size: 0.85rem; margin-bottom: 10px;" data-i18n="spacious-style">Spacious and stylish for your daily essentials.</p>
+            <button class="add-to-cart" data-i18n="buy_now">Buy Now</button>  
+          </div>
+        </div>
+        <div class="product-card">
+          <button class="quick-view-btn" data-i18n="quick_view">Quick View</button>
+          <img src="https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400" alt="Wireless Pro Headphones">
+          <div class="product-info">
+            <span class="product-tag tag-new" data-i18n="new-gadget">Tech Gadget</span>
+            <h3 data-i18n="wireless-pro-headphones">Wireless Pro Headphones</h3>
+            <div class="rating">★★★★★ (5.0)</div>
+            <div class="price">$99.99</div>
+            <p style="font-size: 0.85rem; margin-bottom: 10px;" data-i18n="noise-cancel">Noise-cancelling with crystal clear sound.</p> 
+            <button class="add-to-cart" data-i18n="buy_now">Buy Now</button>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLASH SALE (NEW) -->
+  <section class="flash-sale-section" style="padding: 70px 0;">
+    <div class="container">
+      <div class="flash-sale-header">
+        <div>
+          <h2 style="margin-bottom: 10px;" data-i18n="flash-sale">Flash Sale</h2> 
+          <p data-i18n="flash-sale-desc" >Grab these deals before they're gone! Only a few hours left.</p>
+        </div>
+        <div class="flash-sale-timer">
+          <span data-i18n="ends-in" >Ends in:</span>
+          <div id="flash-timer">04:22:15</div>
+        </div>
+      </div>
+      <div class="products-grid">
+        <div class="product-card">
+          <div class="product-badge" style="background: #ff4757;">-60%</div>
+          <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400" alt="Smartphone">
+          <div class="product-info">
+            <h3 data-i18n="alma-smartphone">Alma Smartphone X</h3>
+            <div class="price">$299.99 <span class="old-price">$749.99</span></div>
+            <button class="add-to-cart" data-i18n="claim-deal">Claim Deal</button>
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-badge" style="background: #ff4757;">-55%</div>
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400" alt="Watch">
+          <div class="product-info">
+            <h3 data-i18n="luxury-gold-watch">Luxury Gold Watch</h3>
+            <div class="price">$129.99 <span class="old-price">$319.99</span></div>
+            <button class="add-to-cart" data-i18n="claim-deal">Claim Deal</button>  
+          </div>
+        </div>
+        <div class="product-card">
+          <div class="product-badge" style="background: #ff4757;">-70%</div>
+          <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400" alt="Shoes">
+          <div class="product-info">
+            <h3 data-i18n="pro-runner-shoes">Pro Runner Shoes</h3>
+            <div class="price">$45.99 <span class="old-price">$149.99</span></div>
+            <button class="add-to-cart" data-i18n="claim-deal">Claim Deal</button>  
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPECIAL OFFER WITH COUNTDOWN -->
+  <section class="offer-section" style="background: linear-gradient(135deg, #c27b5a 0%, #a55e3f 100%); margin: 30px 32px; border-radius: 40px; padding: 60px 20px; text-align: center;">
+    <div class="offer-content">
+      <h3 style="color: rgb(0, 0, 0) !important;" data-i18n="special-sale"> Special Sale!</h3>
+      <div class="discount" style="font-size: 3rem; font-weight: 800; color: rgb(0, 0, 0) !important;">Up to 50% OFF</div>
+      <p style="color: rgb(0, 0, 0) !important;" data-i18n="special-sale-desc">On all winter collection + free worldwide shipping</p> 
+      <div class="countdown" id="countdown" style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
+        <div data-i18n="days"><span id="days" >00</span>Days</div>
+        <div data-i18n="hours"><span id="hours" >00</span>Hours</div>
+        <div data-i18n="minutes"><span id="minutes" >00</span>Mins</div>
+        <div data-i18n="seconds"><span id="seconds" >00</span>Secs</div>  
+      </div>
+      <a href="#" class="btn" style="background: rgb(0, 0, 0); color: #c27b5a !important;" data-i18n="shop-sale">Shop Sale →</a>
+    </div>
+  </section>
+
+  <!-- ABOUT ALMA -->
+  <section style="padding: 70px 0;">
+    <div class="container">
+      <h2 data-i18n="about-alma">About Alma</h2>
+      <div style="max-width: 900px; margin: 0 auto; text-align: center;">
+        <p style="font-size: 1.1rem; margin-bottom: 30px;" data-i18n="about-alma-desc">Since 2020, Alma has redefined style with premium quality and a sustainable approach. We believe fashion should be accessible, ethical, and exciting.</p>
+        <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 30px;">
+          <div data-i18n="happy-customers"><strong>10,000+</strong><br>Happy Customers</div>
+          <div data-i18n="products"><strong>500+</strong><br>Products</div>
+          <div data-i18n="support"><strong>24/7</strong><br>Support</div>
+          <div data-i18n="easy-returns"><strong>30 Days</strong><br>Easy Returns</div>  
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CUSTOMER TESTIMONIALS -->
+  <section style="padding: 70px 0; background: #FAFAFA !important;">
+    <div class="container">
+      <h2 data-i18n="customer-reviews" >Customer Reviews</h2>
+      <div class="testimonials-grid">
+        <div class="testimonial-card" style="padding: 28px;">
+          <div class="quote-icon" style="font-size: 48px; color: #c27b5a;">"</div>
+          <p class="testimonial-text" data-i18n="testimonial-1">The jacket quality is amazing! Fast shipping. I'll definitely shop again.</p>
+          <h4>- Sarah A.</h4>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="testimonial-card" style="padding: 28px;">
+          <div class="quote-icon" style="font-size: 48px; color: #c27b5a;">"</div>
+          <p class="testimonial-text" data-i18n="testimonial-2">Best online shopping experience. Support team helped me with an exchange flawlessly.</p>
+          <h4>- Mohammad K.</h4>
+          <div class="rating">★★★★★</div>
+        </div>
+        <div class="testimonial-card" style="padding: 28px;">
+          <div class="quote-icon" style="font-size: 48px; color: #e56a32;">"</div>
+          <p class="testimonial-text" data-i18n="testimonial-3">Alma's 2026 collection is breathtaking! Received so many compliments. Thank you Alma!</p>
+          <h4>- Nazanin R.</h4>
+          <div class="rating">★★★★★</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter" style="background: #c95925; margin: 30px 32px; border-radius: 40px; padding: 60px 30px; text-align: center;">
+    <div class="container">
+      <h2 style="color: rgb(0, 0, 0) !important;" data-i18n="newsletter-title">10% OFF Your First Order</h2>
+      <p style="color: rgb(0, 0, 0) !important;" data-i18n="newsletter-desc">Subscribe to get exclusive deals and new arrivals</p>
+      <form class="newsletter-form" onsubmit="alert('Thank you! Your 10% discount code has been sent to your email.'); return false;" style="display: flex; max-width: 500px; margin: 30px auto 0; gap: 15px; flex-wrap: wrap; justify-content: center;">
+        <input type="email" placeholder="Enter your email" required style="flex: 1; padding: 14px 20px; border-radius: 50px; border: none; background: white;">
+        <button type="submit" class="btn" style="background: white; color: #e36b33 !important;" data-i18n="newsletter-submit">Subscribe →</button>
+      </form>
+    </div>
+  </section>
+</main>
+
+  <!-- FOOTER -->
+<footer>
 
     <div class="footer-category">
 
       <div class="container">
 
-        <h2 class="footer-category-title">Brand directory</h2>
+        <h2 class="footer-category-title" data-i18n="footer_brand_directory">Brand directory</h2>
 
         <div class="footer-category-box">
 
-          <h3 class="category-box-title">Fashion :</h3>
+          <h3 class="category-box-title" data-i18n="footer_fashion">Fashion :</h3>
 
-          <a href="#" class="footer-category-link">T-shirt</a>
-          <a href="#" class="footer-category-link">Shirts</a>
-          <a href="#" class="footer-category-link">shorts & jeans</a>
-          <a href="#" class="footer-category-link">jacket</a>
-          <a href="#" class="footer-category-link">dress & frock</a>
-          <a href="#" class="footer-category-link">innerwear</a>
-          <a href="#" class="footer-category-link">hosiery</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_fashion_tshirt">T-shirt</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_fashion_shirts">Shirts</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_fashion_shorts_jeans">shorts & jeans</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_fashion_jacket">jacket</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_fashion_dress_frock">dress & frock</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_fashion_innerwear">innerwear</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_fashion_hosiery">hosiery</a>
 
         </div>
 
         <div class="footer-category-box">
-          <h3 class="category-box-title">footwear :</h3>
+          <h3 class="category-box-title" data-i18n="footer_footwear">footwear :</h3>
         
-          <a href="#" class="footer-category-link">sport</a>
-          <a href="#" class="footer-category-link">formal</a>
-          <a href="#" class="footer-category-link">Boots</a>
-          <a href="#" class="footer-category-link">casual</a>
-          <a href="#" class="footer-category-link">cowboy shoes</a>
-          <a href="#" class="footer-category-link">safety shoes</a>
-          <a href="#" class="footer-category-link">Party wear shoes</a>
-          <a href="#" class="footer-category-link">Branded</a>
-          <a href="#" class="footer-category-link">Firstcopy</a>
-          <a href="#" class="footer-category-link">Long shoes</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_sport">sport</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_formal">formal</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_boots">Boots</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_casual">casual</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_cowboy">cowboy shoes</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_safety">safety shoes</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_party">Party wear shoes</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_branded">Branded</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_firstcopy">Firstcopy</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_footwear_long">Long shoes</a>
         </div>
 
         <div class="footer-category-box">
-          <h3 class="category-box-title">jewellery :</h3>
+          <h3 class="category-box-title" data-i18n="footer_jewellery">jewellery :</h3>
         
-          <a href="#" class="footer-category-link">Necklace</a>
-          <a href="#" class="footer-category-link">Earrings</a>
-          <a href="#" class="footer-category-link">Couple rings</a>
-          <a href="#" class="footer-category-link">Pendants</a>
-          <a href="#" class="footer-category-link">Crystal</a>
-          <a href="#" class="footer-category-link">Bangles</a>
-          <a href="#" class="footer-category-link">bracelets</a>
-          <a href="#" class="footer-category-link">nosepin</a>
-          <a href="#" class="footer-category-link">chain</a>
-          <a href="#" class="footer-category-link">Earrings</a>
-          <a href="#" class="footer-category-link">Couple rings</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_necklace">Necklace</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_earrings">Earrings</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_couple_rings">Couple rings</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_pendants">Pendants</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_crystal">Crystal</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_bangles">Bangles</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_bracelets">bracelets</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_nosepin">nosepin</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_chain">chain</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_earrings">Earrings</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_jewellery_couple_rings">Couple rings</a>
         </div>
 
         <div class="footer-category-box">
-          <h3 class="category-box-title">cosmetics :</h3>
+          <h3 class="category-box-title" data-i18n="footer_cosmetics">cosmetics :</h3>
         
-          <a href="#" class="footer-category-link">Shampoo</a>
-          <a href="#" class="footer-category-link">Bodywash</a>
-          <a href="#" class="footer-category-link">Facewash</a>
-          <a href="#" class="footer-category-link">makeup kit</a>
-          <a href="#" class="footer-category-link">liner</a>
-          <a href="#" class="footer-category-link">lipstick</a>
-          <a href="#" class="footer-category-link">prefume</a>
-          <a href="#" class="footer-category-link">Body soap</a>
-          <a href="#" class="footer-category-link">scrub</a>
-          <a href="#" class="footer-category-link">hair gel</a>
-          <a href="#" class="footer-category-link">hair colors</a>
-          <a href="#" class="footer-category-link">hair dye</a>
-          <a href="#" class="footer-category-link">sunscreen</a>
-          <a href="#" class="footer-category-link">skin loson</a>
-          <a href="#" class="footer-category-link">liner</a>
-          <a href="#" class="footer-category-link">lipstick</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_shampoo">Shampoo</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_bodywash">Bodywash</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_facewash">Facewash</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_makeup_kit">makeup kit</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_liner">liner</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_lipstick">lipstick</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_perfume">perfume</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_body_soap">Body soap</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_scrub">scrub</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_hair_gel">hair gel</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_hair_colors">hair colors</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_hair_dye">hair dye</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_sunscreen">sunscreen</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_skin_loson">skin loson</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_liner">liner</a>
+          <a href="#" class="footer-category-link" data-i18n="footer_cosmetics_lipstick">lipstick</a>
         </div>
 
       </div>
@@ -849,27 +1530,27 @@
         <ul class="footer-nav-list">
 
           <li class="footer-nav-item">
-            <h2 class="nav-title">Popular Categories</h2>
+            <h2 class="nav-title" data-i18n="footer_popular_categories">Popular Categories</h2>
           </li>
 
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Fashion</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_fashion">Fashion</a>
           </li>
 
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Electronic</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_electronic">Electronic</a>
           </li>
 
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Cosmetic</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_cosmetics">Cosmetic</a>
           </li>
 
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Health</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_health">Health</a>
           </li>
 
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Watches</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_watches">Watches</a>
           </li>
 
         </ul>
@@ -877,55 +1558,27 @@
         <ul class="footer-nav-list">
         
           <li class="footer-nav-item">
-            <h2 class="nav-title">Products</h2>
+            <h2 class="nav-title" data-i18n="footer_products">Products</h2>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Prices drop</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_prices_drop">Prices drop</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">New products</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_new_products">New products</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Best sales</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_best_sales">Best sales</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Contact us</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_contact_us">Contact us</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Sitemap</a>
-          </li>
-        
-        </ul>
-
-        <ul class="footer-nav-list">
-        
-          <li class="footer-nav-item">
-            <h2 class="nav-title">Our Company</h2>
-          </li>
-        
-          <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Delivery</a>
-          </li>
-        
-          <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Legal Notice</a>
-          </li>
-        
-          <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Terms and conditions</a>
-          </li>
-        
-          <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">About us</a>
-          </li>
-        
-          <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Secure payment</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_sitemap">Sitemap</a>
           </li>
         
         </ul>
@@ -933,27 +1586,55 @@
         <ul class="footer-nav-list">
         
           <li class="footer-nav-item">
-            <h2 class="nav-title">Services</h2>
+            <h2 class="nav-title" data-i18n="footer_our_company">Our Company</h2>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Prices drop</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_delivery">Delivery</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">New products</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_legal_notice">Legal Notice</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Best sales</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_terms_conditions">Terms and conditions</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Contact us</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_about_us">About us</a>
           </li>
         
           <li class="footer-nav-item">
-            <a href="#" class="footer-nav-link">Sitemap</a>
+            <a href="#" class="footer-nav-link" data-i18n="footer_secure_payment">Secure payment</a>
+          </li>
+        
+        </ul>
+
+        <ul class="footer-nav-list">
+        
+          <li class="footer-nav-item">
+            <h2 class="nav-title" data-i18n="footer_services">Services</h2>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link" data-i18n="footer_prices_drop">Prices drop</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link" data-i18n="footer_new_products">New products</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link" data-i18n="footer_best_sales">Best sales</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link" data-i18n="footer_contact_us">Contact us</a>
+          </li>
+        
+          <li class="footer-nav-item">
+            <a href="#" class="footer-nav-link" data-i18n="footer_sitemap">Sitemap</a>
           </li>
         
         </ul>
@@ -961,7 +1642,7 @@
         <ul class="footer-nav-list">
 
           <li class="footer-nav-item">
-            <h2 class="nav-title">Contact</h2>
+            <h2 class="nav-title" data-i18n="footer_contact">Contact</h2>
           </li>
 
           <li class="footer-nav-item flex">
@@ -969,9 +1650,9 @@
               <ion-icon name="location-outline"></ion-icon>
             </div>
 
-            <address class="content">
-              419 State 414 Rte
-              Beaver Dams, New York(NY), 14812, USA
+            <address class="content" data-i18n="footer_address">
+              14 street,
+              karte-char, kabul, Afghanistan
             </address>
           </li>
 
@@ -980,7 +1661,7 @@
               <ion-icon name="call-outline"></ion-icon>
             </div>
 
-            <a href="tel:+607936-8058" class="footer-nav-link">(607) 936-8058</a>
+            <a href="tel:+93764148944" class="footer-nav-link">+93 76 414 8944</a>
           </li>
 
           <li class="footer-nav-item flex">
@@ -988,7 +1669,7 @@
               <ion-icon name="mail-outline"></ion-icon>
             </div>
 
-            <a href="mailto:example@gmail.com" class="footer-nav-link">example@gmail.com</a>
+            <a href="mailto:Alma@gmail.com" class="footer-nav-link">Alma@gmail.com</a>
           </li>
 
         </ul>
@@ -996,7 +1677,7 @@
         <ul class="footer-nav-list">
 
           <li class="footer-nav-item">
-            <h2 class="nav-title">Follow Us</h2>
+            <h2 class="nav-title" data-i18n="footer_follow_us">Follow Us</h2>
           </li>
 
           <li>
@@ -1049,10 +1730,58 @@
 
     </div>
 
-  </footer>
+</footer>
 
 
+  <script>
+    // COUNTDOWN TIMER (target: Dec 31, 2026)
+    function startCountdown() {
+      const target = new Date('December 31, 2026 23:59:59').getTime();
+      setInterval(() => {
+        const now = new Date().getTime();
+        const diff = target - now;
+        if(diff < 0) {
+          document.getElementById('days').innerText = '00';
+          document.getElementById('hours').innerText = '00';
+          document.getElementById('minutes').innerText = '00';
+          document.getElementById('seconds').innerText = '00';
+          return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+      }, 1000);
+    }
+    startCountdown();
 
+    // ADD TO CART ALERT
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        alert(' Product added to your cart!');
+      });
+    });
+
+    // DARK MODE TOGGLE (fully fixed visibility)
+    const themeToggle = document.getElementById('theme-toggle-btn');
+    let isDark = false;
+    themeToggle.addEventListener('click', () => {
+      if(!isDark) {
+        document.body.classList.add('dark-mode');
+        themeToggle.innerHTML = '<ion-icon name="sunny-outline"></ion-icon>';
+        isDark = true;
+      } else {
+        document.body.classList.remove('dark-mode');
+        themeToggle.innerHTML = '<ion-icon name="moon-outline"></ion-icon>';
+        isDark = false;
+      }
+    });
+  </script>
 
 
 
@@ -1068,5 +1797,4 @@
   <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 
 </body>
-
 </html>
